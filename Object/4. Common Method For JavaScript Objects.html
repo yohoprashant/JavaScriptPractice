@@ -1,0 +1,27 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
+<html lang="en"> 
+<head> 
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"> 
+	<title>Learning Javascript</title> 
+</head> 
+<body> 
+	<script type="text/javascript">
+		var commonConvert = function(){
+			return this.dollar * this.dollarToNPRRate;
+		}
+		var dollarToNPR = new Object();
+		dollarToNPR.dollar = 500;
+		dollarToNPR.dollarToNPRRate = 103.12;
+		dollarToNPR.convert = commonConvert;
+
+		var dollarToINR = {
+		 	dollar : 500,
+			dollarToNPRRate : 64.45,
+			convert : commonConvert
+		}
+
+		document.write("1."+dollarToNPR.convert() + '<br/>');
+		document.write("2."+dollarToINR.convert());
+	</script>
+</body> 
+</html>

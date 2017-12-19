@@ -1,0 +1,27 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
+<html lang="en"> 
+<head> 
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"> 
+	<title>Learning Javascript</title> 
+</head> 
+<body> 
+	<script type="text/javascript">
+		var peopleConstructor = function(name, age, designation){
+				this.name = name;
+				this.age = age;
+				this.designation = designation;
+
+				this.printPerson = function(){
+					console.log( this.name + "," + this.age + "," + this.designation);
+				}
+				return this;
+		};
+
+		var person1 = new peopleConstructor('Anil',28, 'Web Developer');
+		var person2 = new peopleConstructor('Kunwar',30, 'Web Developer');
+
+		person1.printPerson();
+		person2.printPerson();
+	</script>
+</body> 
+</html>
