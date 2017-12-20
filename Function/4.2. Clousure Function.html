@@ -1,0 +1,22 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
+<html lang="en"> 
+<head> 
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"> 
+	<title>Learning Javascript</title> 
+</head> 
+<body> 
+	<script type="text/javascript">
+		function celebrityName (firstName) {
+			var nameIntro = "This celebrity is ";
+    // this inner function has access to the outer function's variables, including the parameter​
+    function lastName (theLastName) {
+    	return nameIntro + firstName + " " + theLastName;
+	    }
+	    return lastName;
+	  }
+	  var mjName = celebrityName ("Michael"); // At this juncture, the celebrityName outer function has returned.​
+		console.log(mjName("Jackson")); // This celebrity is Michael Jackson 
+	</script>
+</body> 
+</html>
