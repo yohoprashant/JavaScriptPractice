@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
+<html lang="en"> 
+<head> 
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"> 
+	<title>Learning Javascript</title> 
+</head> 
+<body> 
+	<script type="text/javascript">
+		/* 
+		//Basic Callback Function 
+		function doSomething(callback) {
+		  var value = 42;
+		  callback(value);
+		}
+		doSomething(function(value) {
+		  console.log('Got a value:' + value);
+		});
+		*/
+
+		function doSomething() {
+			return {
+				then: function(callback) {
+					var value = 42;
+					callback(value);
+				}
+			};
+		}
+
+		doSomething().then(function(value) {
+			console.log('Got a value:' + value);
+		});
+
+
+	</script>
+</body> 
+</html>

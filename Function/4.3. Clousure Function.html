@@ -7,21 +7,21 @@
 <body> 
 	<script type="text/javascript">
 		var celebrityID = function() {
-	    var celebrityID = 999;
-	    
-        var getID=function() {
-           
-          return celebrityID;
-		    }
-        var setID = function(theNewID)  {
+			var celebrityID = 999;
+			
+			var getID=function() {
+				
+				return celebrityID;
+			}
+			var setID = function(theNewID)  {
             // This inner function will change the outer function's variable anytime​
             celebrityID = theNewID;
             return(celebrityID);
+          }
+          return {getID:getID, setID:setID};
         }
-		   return {getID:getID, setID:setID};
-		}
-		var mjID = celebrityID();
-		console.log(mjID.getID());
+        var mjID = celebrityID();
+        console.log(mjID.getID());
 		console.log(mjID.setID(567)); // Changes the outer function's variable​
 		console.log(mjID.getID()); // 567: It returns the updated celebrityId variable 
 	</script>
