@@ -1,0 +1,31 @@
+<script type="text/javascript" src="http://underscorejs.org/underscore.js"></script>
+<script type="text/javascript">
+	var vegetables = [
+		{name:"Okra", color:'Green'},
+		{name:"Carrot", color:'Red'},		
+		{name:"Brinjal", color:'Purple'},
+		{name:"Peas", color:'Green'},
+		{name:"BeetRoot", color:'Red'},
+		{name:"Broccoli", color:'Green'},
+		{name:"Cabbage", color:'Green'}
+	]
+
+//Listing green vegetables using Filter
+
+isGreenVegetables = function(vegetable){
+	return vegetable.color === "Green";
+};
+var greenVegetables = vegetables.filter(isGreenVegetables);
+/*
+//Traditional Way to list all Green Vegetable
+	var greenVegetables=[];
+	for(var i=0; i < vegetable.length; i++)
+	{
+		if(vegetable[i].color == 'Green')
+		{
+			greenVegetables.push(vegetable[i]);
+		}
+	}
+*/
+	console.log(">>",greenVegetables);
+</script>

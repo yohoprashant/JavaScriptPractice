@@ -1,0 +1,28 @@
+<script type="text/javascript" src="http://underscorejs.org/underscore.js"></script>
+<script type="text/javascript">
+	var vegetables = [
+		{name:"Okra", color:'Green'},
+		{name:"Carrot", color:'Red'},		
+		{name:"Brinjal", color:'Purple'},
+		{name:"Peas", color:'Green'},
+		{name:"BeetRoot", color:'Red'},
+		{name:"Broccoli", color:'Green'},
+		{name:"Cabbage", color:'Green'}
+	]
+
+
+	//vegetablesName = vegetables.map((vegetable)=>{return vegetable.color;});
+
+	//if functuon fits in a single line
+	vegetablesName = vegetables.map((vegetable) => vegetable.name); 
+	
+	/*vegetablesName = vegetables.map(function(vegetable){
+		return vegetable.name;
+	})*/
+	/*vegetablesName = [];
+	for (var i=0;i < vegetables.length; i++){
+		vegetablesName.push(vegetables[i].name);
+	}*/
+
+	console.log(">>",vegetablesName);
+</script>

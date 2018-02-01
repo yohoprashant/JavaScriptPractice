@@ -18,6 +18,7 @@
 											  };
 									  */
 		function Promise(fn) {
+			console.log("inside Promise");
 		  var callback = null;
 
 												  /*
@@ -26,25 +27,41 @@
 															}
 													*/
 		  this.then = function(cb) {
+		  	console.log("inside Then");
 		    callback = cb;
+		    console.log("going out side Then");
 		  };
 
 		  function resolve(value) {
+		  	console.log("inside resove");
 		    // force callback to be called in the next
 		    // iteration of the event loop, giving
 		    // callback a chance to be set by then()
 		    setTimeout(function() {
 		      callback(value);
 		    }, 1);
+		    console.log("going out of resove");;
 		  }
-
+		  /*
+									resolve =	function resolve(value) {
+													    setTimeout(function() {
+													      callback(value);
+													    }, 1);
+													  }
+					fn= function(resolve) {
+						    var value = 42;
+						    resolve(value);
+						  };
+		  */
 		  fn(resolve);
 		}
 
 		function doSomething() {
+			console.log("inside doSomething");
 		  return new Promise(function(resolve) {
 		    var value = 42;
 		    resolve(value);
+		    console.log("going out of doSomething");
 		  });
 		}
 		doSomething().then(function(value) {

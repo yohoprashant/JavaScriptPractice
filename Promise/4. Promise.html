@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
+<html lang="en"> 
+<head> 
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"> 
+	<title>Learning Javascript</title> 
+</head> 
+<body> 
+	<script type="text/javascript">
+
+										/*
+																	resolve = function resolve(newValue) {
+																							value = newValue;
+																							state = 'resolved';
+																							console.log("state>",state);
+
+																							if(deferred) {
+																								handle(deferred);
+																							}
+																						}
+										fn = function(resolve) {
+														var value = 21;
+														resolve(value);
+													}
+										*/
+		var Promise = function(fn) {
+			var state = 'pending';
+			var value;
+			var deferred = null;
+			console.log("state:",state);
+			function resolve(newValue) {
+				console.info("Into resolve function");
+				value = newValue;
+				state = 'resolved';
+				console.log("state>",state);
+				console.log("newValue:",newValue);
+				if(deferred) {
+					console.log('deferred:',deferred);
+					handle(deferred);
+				}
+				console.info("Out of resolve function");
+			}
+
+			function handle(handler) {
+				console.info("Into handle function");
+				console.log("state>>",state);
+				//if(value==21) state='pending';
+				if(state === 'pending') {
+					deferred = handler;
+					console.log(deferred);
+					return;
+				}
+
+				if(!handler.onResolved) { //if current promise has resolved 
+					handler.resolve(value);
+					return;
+				}
+
+				var ret = handler.onResolved(value);
+				console.log("ret: ",ret);
+				handler.resolve(ret);
+			}
+													/*
+													onResolved = function(result) {
+																					console.log('first result', result);
+																					return 88;
+																				}
+													*/
+			this.then = function(onResolved) {
+				console.info("Into this.then");
+				return new Promise(function(resolve) {
+					handle({
+						onResolved: onResolved,
+						resolve: resolve
+					});
+				});
+			};
+			/*
+										resolve = function resolve(newValue) {
+																value = newValue;
+																state = 'resolved';
+																console.log("state>",state);
+																
+																if(deferred) {
+																	handle(deferred);
+																}
+															};
+			fn = function(resolve) {
+							var value = 21;
+							resolve(value);
+						}
+			*/
+			fn(resolve);
+		}
+
+
+		/*************************************************/
+
+		var doSomething = new Promise(function(resolve) {
+			console.log("executing Promise() closoure");
+			var value = 21;
+			resolve(value);
+		});
+
+		doSomething.then(function(result) {
+			console.log('first result', result);
+			return 88;
+		}).then(function(secondResult) {
+			console.log('second result', secondResult);
+		});
+
+	</script>
+</body> 
+</html>

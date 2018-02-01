@@ -1,0 +1,32 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
+<html lang="en"> 
+<head> 
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"> 
+	<title>Learning Javascript</title> 
+</head> 
+<body> 
+	<script type="text/javascript">
+		var add = function(a){
+			return function(b)
+			{
+				return a+b;
+			}
+		}
+		/*var addToFive = add(5);
+		console.log(addToFive(20));*/
+		console.log(add(5)(20))
+
+		var sayWhat = function(a){
+			return function(b){
+					return function(c){
+						console.log("Saying " + a + " to " + b + " using " +  c);
+					}
+				}
+				
+		}
+		sayWhat("HI")("Prashant")("Javascript")
+		
+	</script>
+	
+</body> 
+</html>

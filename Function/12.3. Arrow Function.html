@@ -1,0 +1,23 @@
+<script type="text/javascript">
+	var materials = [
+	  'Hydrogen',
+	  'Helium',
+	  'Lithium',
+	  'Beryllium'
+	];
+
+	let res1 = materials.map(function(material) { 
+	  return material.length; 
+	}); // [8, 6, 7, 9]
+
+	console.log(res1);
+
+	let res2 = materials.map((material) => {
+	  return material.length;
+	}); // [8, 6, 7, 9]
+
+	console.log(res2);
+
+	let res3 = materials.map(({length}) => length);
+	console.log(res3);
+</script>

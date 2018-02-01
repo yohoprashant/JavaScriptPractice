@@ -1,0 +1,32 @@
+<script>
+/*let a = fetch("http://patonapparel.com/wp-json/wp/v2/pages/267")
+.then((response) => response.json())
+  .then((responseJSON) => { 
+  	return responseJSON;
+  })
+  .then(post => {
+  	console.log(post.title.rendered);
+  });
+*/
+
+function* a(){
+  const url = "http://patonapparel.com/wp-json/wp/v2/pages/267";
+  
+  const response = yield fetch(url);
+  //console.log(response);
+  const post = yield response.json()
+  //console.log(post)
+  const title = post.title.rendered
+ 	console.log(title);
+}
+const iterator = a();
+const iteration= iterator.next()
+promise = iteration.value;
+promise.then((x) => {
+	let anotherIteration=iterator.next(x); 
+	let anotherPromise = anotherIteration.value;
+	anotherPromise.then(y => {
+		iterator.next(y); 
+	})
+});
+</script>

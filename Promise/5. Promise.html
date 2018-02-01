@@ -1,0 +1,165 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
+<html lang="en"> 
+<head> 
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"> 
+	<title>Learning Javascript</title> 
+</head> 
+<body> 
+	<script type="text/javascript">
+												/*
+																resolve = function resolve(newValue) {
+																	if(newValue && typeof newValue.then === 'function') {
+																		newValue.then(resolve, reject);
+																		return;
+																	}
+																	state = 'resolved';
+																	value = newValue;
+
+																	if(deferred) {
+																		handle(deferred);
+																	}
+																}
+																						reject = function reject(reason) {
+																							state = 'rejected';
+																							value = reason;
+
+																							if(deferred) {
+																								handle(deferred);
+																							}
+																						}
+										fn = function(resolve, reject) {
+														var value = 21;
+														resolve(value);
+													}
+										*/
+		function Promise(fn) {
+			var state = 'pending';
+			var value;
+			var deferred = null;
+
+			function resolve(newValue) {
+				console.info("Into resolve function");
+				console.log("newValue: ",newValue);
+
+				if(newValue && typeof newValue.then === 'function') {
+					newValue.then(resolve, reject);
+					return;
+				}
+				state = 'resolved';
+				value = newValue;
+
+				if(deferred) {
+					handle(deferred);
+				}
+				console.info("Out of resolve function");
+			}
+
+			function reject(reason) {
+				console.info("Into reject function");
+				state = 'rejected';
+				value = reason;
+
+				if(deferred) {
+					handle(deferred);
+				}
+				console.info("Out of reject function");
+			}
+
+			function handle(handler) {
+				console.info("Into handle function");
+				if(state === 'pending') {
+					deferred = handler;
+					return;
+				}
+
+				var handlerCallback;
+				//if(value==21) state="reject"; 
+				if(state === 'resolved') {
+					handlerCallback = handler.onResolved;
+				} else {
+					handlerCallback = handler.onRejected;
+				}
+
+				if(!handlerCallback) {
+					if(state === 'resolved') {
+						handler.resolve(value);
+					} else {
+						handler.reject(value);
+					}
+
+					return;
+				}
+
+				var ret = handlerCallback(value);
+				handler.resolve(ret);
+				console.info("Out of handle function");
+			}
+													/*
+													onResolved = function(result) {
+																					console.log('first result', result);
+																					return 88;
+																				}
+																				onRejected = function(error) {
+																											  console.log('uh oh', error);
+																											}
+													*/
+			this.then = function(onResolved, onRejected) {
+				console.info("Into this.then");
+				return new Promise(function(resolve, reject) {
+					handle({
+						onResolved: onResolved,
+						onRejected: onRejected,
+						resolve: resolve,
+						reject: reject
+					});
+					console.info("Out of this.then");
+				});
+
+			};
+					/*
+					resolve = function resolve(newValue) {
+						if(newValue && typeof newValue.then === 'function') {
+							newValue.then(resolve, reject);
+							return;
+						}
+						state = 'resolved';
+						value = newValue;
+
+						if(deferred) {
+							handle(deferred);
+						}
+					}
+									reject = function reject(reason) {
+										state = 'rejected';
+										value = reason;
+
+										if(deferred) {
+											handle(deferred);
+										}
+									}
+			*/
+			fn(resolve, reject);
+		}
+
+
+		/*************************************************/
+
+		var doSomething = new Promise(function(resolve,reject) {
+			var value = 21;
+			resolve(value);
+		});
+
+		doSomething.then(function(result) {
+			console.log('first result', result);
+			return 99;
+		}, function(error) {
+		  console.log('uh oh', error);
+		}).then(function(secondResult){
+			console.log('second result', secondResult);
+		}, function(error) {
+		  console.log('uh oh', error);
+		});
+
+	</script>
+</body> 
+</html>
